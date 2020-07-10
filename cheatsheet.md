@@ -1,4 +1,4 @@
-## Reconaissance
+## Reconaissance---------------------------------------------
 
 ##### nmap scanning
 
@@ -24,7 +24,7 @@ sqlmap --tables -T users --dump
 enum4linux -a <MACHINE IP>
 ```
 
-## Foothold
+## Foothold---------------------------------------------
 
 ##### connecting ssh
 ```bash
@@ -38,7 +38,7 @@ scp {path to linenum} {user}@{host}:{path} #Example: scp /opt/LinEnum.sh pingu@1
 
 
 
-## Foothold Enumeration
+## Foothold Enumeration---------------------------------------------
 
 ###### getting an interactive shell
 ```bash
@@ -62,11 +62,13 @@ id
 
 ```bash
 find / -type f {-group/-user} {group/user} 2>/dev/null
+ls -la /
 ```
 
-##### check console history of windows terminal
+##### check console history
 
 ```bash
+cat ~/.*history | less
 type C:\Users\{user}\AppData\Roaming\Microsoft\Windows\PowerShell\PSReadline\ConsoleHost_history.txt
 ```
 
@@ -82,6 +84,7 @@ sudo -l
 ##### check root processes
 ```bash
 find / -perm +6000 2>/dev/null | grep '/bin/'
+find / -type f -a \( -perm -u+s -o -perm -g+s \) -exec ls -l {} \; 2> /dev/null
 ```
 
 ###### pivoting to other users (if you have password)
@@ -91,29 +94,33 @@ su {user name}
 
 
 
-## Privelege Escalation 
+## Privelege Escalation ---------------------------------------------
 
-###### running bash in vim (if vim is runnable)
-```
-:shell 
-```
+##### Shell esscape sequences
+https://gtfobins.github.io/
 
-##### running bash in nmap (if nmap is runnable)
-```
-nmap --interactive
-!sh
-```
+##### Weak file permissions
+if /etc/shadow is readable -> crack hash (use john)
+if /etc/shadow is writable -> rewrite hash (use john)
+if /etc/passwd is writable -> add password (use openssl passwd)
 
-##### changing PATH
+##### Poisoning Cron jobs
+
+##### adding PATH (for creating malicious programs)
 ```bash
-export PATH=/tmp:$PATH
+export PATH={/tmp}:$PATH
 ```
+
+##### Mysl UDF priv esc (if mysql is running on root)
+https://www.exploit-db.com/exploits/1518
+
+##### Kernel Exploits
+perl /home/user/tools/kernel-exploits/linux-exploit-suggester-2/linux-exploit-suggester-2.pl
 
 ## Misc
 
 ##### use gdb in checking binary files
-##### pwn commandd to check excessive input
-##### pwn command to check how many excessive input is actually needed to overwrite certain address
+##### pwn command for overflow
 
 ##### in cracking hashes
 ```bash
@@ -128,7 +135,12 @@ john id_rsa.hash -wordlist=rockyou.txt
 ```
 https://www.abhizer.com/crack-ssh-with-john/
 
-## Reminders
+##### chmod permissions
+1 - execute
+2 - write
+4 - read
+
+## References
 
 ##### Root Reverse Shell Cheat sheet
 http://pentestmonkey.net/cheat-sheet/shells/reverse-shell-cheat-sheet
