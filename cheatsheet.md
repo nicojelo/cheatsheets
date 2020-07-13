@@ -96,9 +96,6 @@ su {user name}
 
 ## Privelege Escalation ---------------------------------------------
 
-##### Shell esscape sequences
-https://gtfobins.github.io/
-
 ##### Weak file permissions
 if /etc/shadow is readable -> crack hash (use john)
 if /etc/shadow is writable -> rewrite hash (use john)
@@ -144,3 +141,7 @@ https://www.abhizer.com/crack-ssh-with-john/
 
 ##### Root Reverse Shell Cheat sheet
 http://pentestmonkey.net/cheat-sheet/shells/reverse-shell-cheat-sheet
+##### Linux Privelege Escalation checker
+https://github.com/carlospolop/privilege-escalation-awesome-scripts-suite/tree/master/linPEAS
+##### Shell esscape sequences
+https://gtfobins.github.io/
