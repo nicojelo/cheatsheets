@@ -81,7 +81,6 @@ def encrypt(publickeyFile, fileToEncrypt):
 
 
 if __name__ == '__main__':
-	if
 	if(sys.argv[1] == "-g"):
 		genKeyPair()
 	elif(sys.argv[1] == "-d"):
